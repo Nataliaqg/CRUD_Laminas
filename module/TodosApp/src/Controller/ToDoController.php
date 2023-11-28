@@ -84,4 +84,23 @@ public function editAction()
 
    return $this->redirect()->toRoute('todo-app', ['action' => 'index']);
 }
+
+public function deleteAction()
+{
+    $id = (int) $this->params()->fromRoute('id', 0);
+
+    try {
+        $task = $this->table->getTask($id);
+    } catch (\Exception $e) {
+        return $this->redirect()->toRoute('todo-app', ['action' => 'index']);
+    }
+
+    try {
+        $this->table->deleteTask($task->id);
+    } catch (\Exception $e){
+        \error_log("error updating", $e->getMessage());
+    }
+
+    return $this->redirect()->toRoute('todo-app', ['action' => 'index']);
+}
 }

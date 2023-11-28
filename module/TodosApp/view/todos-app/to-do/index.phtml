@@ -21,9 +21,18 @@
     <td><?= $this->escapeHtml($task->finishDate) ?></td>
     <td><?= $task->finished ? 'Si' : 'No'?></td>
     <td>
-        <a class="btn btn-warning ml-1" href="<?= $this->url('todo-app', ['action' => 'edit','id'=>$task->id])?>">Editar</a>
-        <span class="ml-1">Ver</span>
-        <span class="ml-1">Eliminar</span>
+        <a class="btn btn-warning ml-1" href="<?= $this->url('todo-app', ['action' => 'edit','id'=>$task->id])?>">Ver o Editar</a>
+        <a class="btn btn-danger ml-1" href="<?= $this->url('todo-app', ['action' => 'delete','id'=>$task->id])?>"
+        <a class="btn btn-danger btn-sm p-1"
+   onclick="return confirm('Are you sure you want to delete?')"
+   href="<?= $this->url('todo-app', [
+       'action' => 'delete',
+       'id' => $task->id
+   ]) ?>"
+>
+   Eliminar
+</a>
+
     </td>
 </tr>
 <?php endforeach; ?>
