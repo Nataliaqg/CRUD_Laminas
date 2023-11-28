@@ -63,4 +63,9 @@ class TaskTable
 
    $this->tableGateway->update($data, ['id'=>$id]);
 }
+
+public function deleteTask($id)
+{
+    $this->tableGateway->delete(['id' => (int) $id]);
+}
 }
