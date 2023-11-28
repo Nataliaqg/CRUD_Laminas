@@ -21,7 +21,7 @@
     <td><?= $this->escapeHtml($task->finishDate) ?></td>
     <td><?= $task->finished ? 'Si' : 'No'?></td>
     <td>
-        <span class="ml-1">Editar</span>
+        <a class="btn btn-warning ml-1" href="<?= $this->url('todo-app', ['action' => 'edit','id'=>$task->id])?>">Editar</a>
         <span class="ml-1">Ver</span>
         <span class="ml-1">Eliminar</span>
     </td>

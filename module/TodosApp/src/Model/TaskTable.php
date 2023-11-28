@@ -33,4 +33,34 @@ class TaskTable
 
        return $row;
    }
+
+   public function saveTask(Task $task)
+{
+   $now = new \DateTime();
+   $data = [
+       'title' => $task->title,
+       'description' => $task->description,
+       'creation_date' => $now->format('Y-m-d H:i:s'),
+       'finish_date' => $task->finishDate,
+       'finished' => 0
+   ];
+
+   $id = (int) $task->id;
+
+   if ($id === 0 ) {
+       $this->tableGateway->insert($data);
+       return;
+   }
+
+   try {
+       $this->getTask($id);
+   } catch (\Exception $e){
+       throw new RuntimeException(sprintf(
+           'Cannot update task with identifier %d; does not exist',
+           $id
+       ));
+   }
+
+   $this->tableGateway->update($data, ['id'=>$id]);
+}
 }
